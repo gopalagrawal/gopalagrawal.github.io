@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Gopal&#39;s Blog Site</title>
-    <link>gopalagrawal.github.io/posts/</link>
+    <link>https://gopalagrawal.github.io/posts/</link>
     <description>Recent content in Posts on Gopal&#39;s Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 16 Aug 2020 20:06:47 +0530</lastBuildDate>
     
-	<atom:link href="gopalagrawal.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gopalagrawal.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Publish Static Site To Github</title>
-      <link>gopalagrawal.github.io/posts/2020-08/publishstaticsitetogithub/</link>
+      <link>https://gopalagrawal.github.io/posts/2020-08/publishstaticsitetogithub/</link>
       <pubDate>Sun, 16 Aug 2020 20:06:47 +0530</pubDate>
       
-      <guid>gopalagrawal.github.io/posts/2020-08/publishstaticsitetogithub/</guid>
+      <guid>https://gopalagrawal.github.io/posts/2020-08/publishstaticsitetogithub/</guid>
       <description>Introduction  World has moved on to Jamstack They have you believe it&amp;rsquo;s so simple &amp;hellip; but it never reall is. But you really want to publish it somewhere &amp;hellip; not just your local desktop. &amp;hellip; ToDo&amp;hellip; &amp;hellip; environemnt used for this blog &amp;hellip;  This guide is not a hugo tutorial. This is a guide for all the necessary steps that come after you have gone through a Hugo tutorial and decide it is time to publish something on Github-Pages.</description>
     </item>
     
     <item>
       <title>BLOG 2</title>
-      <link>gopalagrawal.github.io/posts/2020-08/blog2/</link>
+      <link>https://gopalagrawal.github.io/posts/2020-08/blog2/</link>
       <pubDate>Sun, 16 Aug 2020 17:40:35 +0530</pubDate>
       
-      <guid>gopalagrawal.github.io/posts/2020-08/blog2/</guid>
+      <guid>https://gopalagrawal.github.io/posts/2020-08/blog2/</guid>
       <description>Introduction Reprehenderit id sunt aliqua voluptate quis enim enim incididunt id est. Est culpa ad aute nulla ad consequat pariatur ipsum ex in commodo irure. Sunt ea officia ut consequat et. Nisi proident pariatur magna officia. Sit eu occaecat nulla deserunt occaecat. Deserunt occaecat qui et commodo deserunt nostrud id laboris voluptate cillum.
 JUST ANOTHER STMT - 33333333</description>
     </item>
     
     <item>
       <title>Publishing Hugo Sites To Github Pages (From Windows)</title>
-      <link>gopalagrawal.github.io/posts/2020-08/publishinghugositestogithubpages/</link>
+      <link>https://gopalagrawal.github.io/posts/2020-08/publishinghugositestogithubpages/</link>
       <pubDate>Sun, 16 Aug 2020 17:40:35 +0530</pubDate>
       
-      <guid>gopalagrawal.github.io/posts/2020-08/publishinghugositestogithubpages/</guid>
+      <guid>https://gopalagrawal.github.io/posts/2020-08/publishinghugositestogithubpages/</guid>
       <description>Introduction  World has moved on to Jamstack They have you believe it&amp;rsquo;s so simple &amp;hellip; but it never reall is. But you really want to publish it somewhere &amp;hellip; not just your local desktop. &amp;hellip; ToDo&amp;hellip; &amp;hellip; environemnt used for this blog &amp;hellip;  This guide is not a hugo tutorial. This is a guide for all the necessary steps that come after you have gone through a Hugo tutorial and decide it is time to publish something on Github-Pages.</description>
     </item>
     
