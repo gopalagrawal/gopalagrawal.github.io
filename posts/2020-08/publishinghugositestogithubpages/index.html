@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="R&amp;D for Networking, Distributed Systems, DevOps, Automation">
+    <meta name="Author" content="Gopal Agrawal">
+    <meta name="keywords" content="Profile, CV, Resume, Blog, Networking, Distributed, DevOps, Automation, Programming">
+    <link rel="stylesheet" href=https://gopalagrawal.github.io/css/syntax.css>
+    <link rel="stylesheet" href=https://gopalagrawal.github.io/css/style.css>
+    <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
+    <title>Gopal Agrawal&#39;s Blog</title>
+</head><body><aside id="sidenav">
+    <header>
+    
+        <a href=https://gopalagrawal.github.io><img src="https://gopalagrawal.github.io/avatar.png" alt="avatar"></a>
+    
+
+    <a id="branding" href=https://gopalagrawal.github.io>
+    <div id="logoTitle">
+        
+            Gopal Agrawal
+        
+    </div>
+    <div id="logoSubTitle">
+        
+            Ph.D, Texas A&M Univ.
+        
+    </div>
+    </a>
+    </header>
+
+    <nav>
+        
+            		
+            <a href="/"
+                
+            >
+                <i class="fas fa-home fa-sm"></i> <span>Home</span>
+            </a>
+        
+            		
+            <a href="/cv"
+                
+            >
+                <i class="fas fa-user fa-sm" ></i> <span>CV / Resume</span>
+            </a>
+        
+            		
+            <a href="/blog/"
+                
+            >
+                <i class="fas fa-keyboard fa-ms"></i> <span>Blog</span>
+            </a>
+        
+            		
+            <a href="/tags"
+                
+            >
+                <i class="fas fa-tags fa-ms"></i> <span>Tags</span>
+            </a>
+        
+            		
+            <a href="https://github.com/gopalagrawal"
+                
+                    target="_blank"
+                
+            >
+                <i class="fab fa-github fa-ms"></i> <span>Github</span>
+            </a>
+        
+            		
+            <a href="/contact"
+                
+            >
+                <i class="far fa-envelope"></i> <span>Contact</span>
+            </a>
+        
+    </nav>
+</aside>
+<main id="main">
+            <a href="javascript:void(0)" id="closebtn" onclick="navToggle()">
+                <i class="fas fa-bars fa-lg"></i>
+            </a>
+            
+            <div class="content">
+    
+    <h1 id="title">Publishing Hugo Sites To Github Pages (From Windows)</h1>
+    
+      
+
+    <h3>Table of Contents</h3>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#1---install-hugo">1 - INSTALL HUGO</a></li>
+    <li><a href="#2---setup-ssh-keys-on-github">2 - SETUP SSH KEYS ON GITHUB</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#3---setup--github--repos">3 - SETUP  GITHUB  REPOS</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#4---create--static--site">4 - CREATE  STATIC  SITE</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#diagram">DIAGRAM</a></li>
+  </ul>
+</nav>
+    
+    <hr>
+<h2 id="introduction">Introduction</h2>
+<ul>
+<li>World has moved on to Jamstack</li>
+<li>They have you believe it&rsquo;s so simple &hellip; but it never reall is.</li>
+<li>But you really want to publish it somewhere &hellip; not just your local desktop.</li>
+<li>&hellip; ToDo&hellip;</li>
+<li>&hellip; environemnt used for this blog &hellip;</li>
+</ul>
+<p>This guide is not a hugo tutorial.  This is a guide for all the necessary steps that come after you have gone through a Hugo tutorial and decide it is time to publish something on Github-Pages.   You have a rough idea on what publishing from Hugo entails, but you&rsquo;re nagged by knowledge-gaps of various details of the setup.  I have consolidated all necessary tid-bits in this blog towards that goal.</p>
+<h4 id="pre-requisites--target-audience">Pre-requisites / Target Audience:</h4>
+<ul>
+<li>You have a GitHub account and comfortable creating repos on it.</li>
+<li>You have Git &amp; GitBash installed on your windows machine.</li>
+<li>Comfortable using a static site generator &hellip; like Hugo, Jekyll etc.</li>
+</ul>
+<hr>
+<h2 id="1---install-hugo">1 - INSTALL HUGO</h2>
+<p>You could choose to download the binary installers from hugo website. But simplest way to install it on windows is via <code>chocolatey</code>.  You want to grab the hugo-extended version.</p>
+<p><strong>Note</strong>: Make sure to run this from a cmd prompt with administrative priveleges.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ choco install hugo-extended
+</code></pre></div><hr>
+<h2 id="2---setup-ssh-keys-on-github">2 - SETUP SSH KEYS ON GITHUB</h2>
+<h4 id="set-up-your-default-identity-use-git-bash-terminal">Set up your default identity. Use Git-Bash Terminal</h4>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&#34;ga.willbe@gmail.com&#34;</span>
+
+$ dir  ~/.ssh  --&gt; C:/Users/&lt;you&gt;/.ssh
+id_rsa 
+id_rsa.pub
+</code></pre></div><h4 id="add-the-key-to-the-ssh-agent">Add the key to the ssh-agent</h4>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">eval</span>  <span class="k">$(</span>ssh-agent<span class="k">)</span>
+Agent pid <span class="m">9700</span> 
+
+$ ssh-add  ~/.ssh/id_rsa
+</code></pre></div><h4 id="add-the-public-key-to-your-github-account">Add the public key to your Github Account</h4>
+<ul>
+<li>Login to Github account.</li>
+<li>Goto Settings</li>
+<li>SSH and GPG Keys -&gt; SSH Keys -&gt; New SSH Key</li>
+<li>Paste contents of <code>id_rsa.pub</code> (content starts with ssh-rsa AAE87F&hellip;)
+<ul>
+<li>Give this key a name &hellip; something like: <code>GA-Home-Laptop</code></li>
+<li>Save</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3---setup--github--repos">3 - SETUP  GITHUB  REPOS</h2>
+<h4 id="there-are-2-types-of-github-pages">There are 2 types of GitHub Pages:</h4>
+<ul>
+<li>User/Organization Pages:  https://&lt;username/org&gt;.github.io/</li>
+<li>Project Pages:  https://&lt;username/org&gt;.github.io/<!-- raw HTML omitted -->/</li>
+</ul>
+<p>This article will focus on the first one only.</p>
+<h4 id="github-userorganization-pages">GitHub User/Organization Pages</h4>
+<ul>
+<li>
+<p>Create a source-project repo (say <code>blogs</code>) on Github (private repo).</p>
+<ul>
+<li>Check &ldquo;Initialize this repository with a README&rdquo; option.</li>
+<li>URL: <code>https://github.com/[user]/[source-project]</code></li>
+<li>This will host the static site&rsquo;s source files.</li>
+</ul>
+</li>
+<li>
+<p>Create a <code>[user].github.io</code> repository (public repo)</p>
+<ul>
+<li>Check &ldquo;Initialize this repository with a README&rdquo; option.</li>
+<li>URL: <code>https://github.com/[user]/[user].github.io</code></li>
+<li>This will host the public github pages rendered from source files.</li>
+</ul>
+</li>
+<li>
+<p>Now clone the source-project repo to your local machine</p>
+<ul>
+<li><code>git clone https://github.com/[user]/[source-project]</code></li>
+<li>We don&rsquo;t need to clone the public github pages repo.</li>
+</ul>
+</li>
+</ul>
+<h4 id="reset-usergithubio-repo-to-an-initial-state-optional">Reset <code>[user].github.io</code> repo to an initial state [Optional]</h4>
+<p>Perhaps you had previously explored creation of github-pages directly on github. Suddenly you are thrown into the deep end of the pool of JamStack frameworks like Jekyll, Hugo, Gatsby etc. Now you want to clean out your repo and start afresh, but not sure how to do it other than a complete deletion and recreation of your repo. Here are the steps to initialize your repo (<code>[user].github.io</code>).  It&rsquo;s preferable to use a  <code>GitBash Terminal</code> for the following steps:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">-- Clone the <span class="o">[</span>user<span class="o">]</span>.github.io repo to <span class="nb">local</span> machine
+git clone https://github.com/<span class="o">[</span>user<span class="o">]</span>/<span class="o">[</span>user<span class="o">]</span>.github.io.git
+
+
+-- Delete everything in this cloned repo. 
+<span class="nb">cd</span>  <span class="o">[</span>user<span class="o">]</span>.github.io
+rm  -rf  *
+
+
+-- Recreate the repo from the current contents only
+git init
+git add .
+git commit -m <span class="s2">&#34;Initial commit&#34;</span>
+
+
+-- push to the github remote repo ensuring you overwrite <span class="nb">history</span>
+-- Make sure you have already added your ssh-key to Github settings. 
+git remote add origin git@github.com:<span class="o">[</span>user<span class="o">]</span>/<span class="o">[</span>user<span class="o">]</span>.github.io.git
+git push  -u  --force  origin  master
+</code></pre></div><h4 id="setup-gitignore-in-source-project-folder">Setup .gitignore in <code>[source-project]</code> folder</h4>
+<ul>
+<li>Download .gitignore file customized for your static site generator. Below URL is for a Hugo specific .gitignore.  You should find/create a similar one specific to your case.
+<ul>
+<li><a href="https://github.com/gohugoio/hugo/blob/master/.gitignore">https://github.com/gohugoio/hugo/blob/master/.gitignore</a></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">-- Git commit and push to origin. 
+$ git add .
+$ git commit -m <span class="s2">&#34;Added .gitignore&#34;</span>
+$ git push origin master
+</code></pre></div><hr>
+<h2 id="4---create--static--site">4 - CREATE  STATIC  SITE</h2>
+<h4 id="generate-a-site">Generate a site</h4>
+<p>This example will use Hugo to generate a sample site.  We will do this in a temporary folder (will be discarded later).  The detailed steps are outlined at:</p>
+<ul>
+<li><a href="https://gohugo.io/getting-started/quick-start/">https://gohugo.io/getting-started/quick-start/</a></li>
+</ul>
+<p>Similar quick start guides are available for all site-generators. The overall flow is:</p>
+<ul>
+<li>create an initial scaffolding using your static site generator.</li>
+<li>copy it over to the source-project folder.</li>
+<li>delete this temporary folder.</li>
+<li>resume all work from within the source-project folder.</li>
+</ul>
+<p>Why create this temporary folder and not instantiate the site directly in our source-project folder?  Because many site generators will start with a clean slate when scaffolding a project folder and will wipe out all previous content in there.  You don&rsquo;t want your README.md or .gitignore etc. to be wiped out.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">-- Scaffold the new site to a temporary <span class="s2">&#34;quickstart&#34;</span> folder
+$ hugo new site quickstart
+
+-- Install a theme <span class="k">for</span> the site
+$ <span class="nb">cd</span> quickstart
+$ git init
+$ git submodule add  https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
+
+-- setup your site configs to use the theme. 
+$ <span class="nb">echo</span> <span class="s1">&#39;theme = &#34;ananke&#34;&#39;</span> &gt;&gt; config.toml
+
+-- Setup other other necessary configs, such as baseURL
+<span class="nv">baseURL</span> <span class="o">=</span> <span class="s2">&#34;[user].github.io&#34;</span>
+</code></pre></div><h4 id="add-some-content">Add some content</h4>
+<p>Example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ hugo new posts/my-first-post.md
+</code></pre></div><p>Edit the post&rsquo;s metadata and content.</p>
+<div class="highlight"><pre class="chroma"><code class="language-txt" data-lang="txt">$ notepad content\posts\my-first-post.md
+---
+title: &#34;My First Post&#34;
+date: 2019-03-26T08:47:11+01:00
+draft: true
+---
+This is my first post
+</code></pre></div><h4 id="test-your-site">Test your site.</h4>
+<p>Run your site-generator&rsquo;s internal server. Example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ hugo server -D
+...
+Web Server is available at http://localhost:1313/ <span class="o">(</span><span class="nb">bind</span> address 127.0.0.1<span class="o">)</span>
+<span class="o">[</span>Test this link in your browser<span class="o">]</span>
+</code></pre></div><h4 id="migrate-from-quickstart-to-source-project-folder">Migrate from quickstart to source-project folder.</h4>
+<ul>
+<li>Paste everything from quickstart project (except the .git folder) into the source-project folder.</li>
+<li>Delete the quickstart folder.</li>
+<li>In source-project folder, delete any distribution folder::  public / dist / etc.</li>
+<li>Add the distribution folder name as a git submodule whose origin is set to <code>[user].github.io</code> repository.  Anything generated and committed within the public/ folder can now be pushed to your [user].github.io site.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">cd</span> <span class="o">[</span>source-project<span class="o">]</span>
+$ git submodule add  -b master https://github.com/<span class="o">[</span>user<span class="o">]</span>/<span class="o">[</span>user<span class="o">]</span>.github.io.git  public
+</code></pre></div><hr>
+<h2 id="diagram">DIAGRAM</h2>
+<p><img src="/posts/2020-08/publishinghugositestogithubpages/HugoPublishFlowChart.jpg" alt="Flow Chart"></p>
+
+
+    
+    <div class="nav-next-prev">
+        <div class="nav-prev">
+            
+                <a href="https://gopalagrawal.github.io/posts/2020-07/nepaltravel/"><i class="fas fa-chevron-left"></i></a>
+            
+        </div>
+
+        <a class="nav-top" href="#">top</i></a>
+
+        <div class="nav-next">
+            
+                <a href="https://gopalagrawal.github.io/posts/2020-08/blog2/"><i class="fas fa-chevron-right"></i></a>
+            
+        </div>
+    </div>
+    
+
+            </div><footer>
+<div class="footer-content">
+
+  <div class="contact-info">
+
+      
+        <div class="footer-mail">
+          <i class="fa fa-envelope"></i> <a href="mailto:anonymous@gmail.com">Email</a> 
+        </div>
+      
+      
+      
+      <div class="footer-phone">
+          <i class="fa fa-phone"></i> 8888888888 
+      </div>
+      
+
+      
+      <div class="footer-github">
+        <a href="https://github.com/gopalagrawal/">
+            <i class="fa fa-github"></i> </a>
+      </div>
+        
+
+      
+      <div class="footer-linkedin">
+        <a href="https://www.linkedin.com/in/gopal-agrawal-a9692b4/">
+            <i class="fa fa-linkedin"></i> </a>
+      </div>
+            
+  </div>
+
+
+<p class="copyright meta">@2020 Copyright</p>
+
+</div>
+</footer>
+
+</main>
+    </body>
+    <script src=https://gopalagrawal.github.io/js/navbutton.js></script>
+</html>

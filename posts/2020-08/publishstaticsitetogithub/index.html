@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="R&amp;D for Networking, Distributed Systems, DevOps, Automation">
+    <meta name="Author" content="Gopal Agrawal">
+    <meta name="keywords" content="Profile, CV, Resume, Blog, Networking, Distributed, DevOps, Automation, Programming">
+    <link rel="stylesheet" href=https://gopalagrawal.github.io/css/syntax.css>
+    <link rel="stylesheet" href=https://gopalagrawal.github.io/css/style.css>
+    <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
+    <title>Gopal Agrawal&#39;s Blog</title>
+</head><body><aside id="sidenav">
+    <header>
+    
+        <a href=https://gopalagrawal.github.io><img src="https://gopalagrawal.github.io/avatar.png" alt="avatar"></a>
+    
+
+    <a id="branding" href=https://gopalagrawal.github.io>
+    <div id="logoTitle">
+        
+            Gopal Agrawal
+        
+    </div>
+    <div id="logoSubTitle">
+        
+            Ph.D, Texas A&M Univ.
+        
+    </div>
+    </a>
+    </header>
+
+    <nav>
+        
+            		
+            <a href="/"
+                
+            >
+                <i class="fas fa-home fa-sm"></i> <span>Home</span>
+            </a>
+        
+            		
+            <a href="/cv"
+                
+            >
+                <i class="fas fa-user fa-sm" ></i> <span>CV / Resume</span>
+            </a>
+        
+            		
+            <a href="/blog/"
+                
+            >
+                <i class="fas fa-keyboard fa-ms"></i> <span>Blog</span>
+            </a>
+        
+            		
+            <a href="/tags"
+                
+            >
+                <i class="fas fa-tags fa-ms"></i> <span>Tags</span>
+            </a>
+        
+            		
+            <a href="https://github.com/gopalagrawal"
+                
+                    target="_blank"
+                
+            >
+                <i class="fab fa-github fa-ms"></i> <span>Github</span>
+            </a>
+        
+            		
+            <a href="/contact"
+                
+            >
+                <i class="far fa-envelope"></i> <span>Contact</span>
+            </a>
+        
+    </nav>
+</aside>
+<main id="main">
+            <a href="javascript:void(0)" id="closebtn" onclick="navToggle()">
+                <i class="fas fa-bars fa-lg"></i>
+            </a>
+            
+            <div class="content">
+    
+    <h1 id="title">Publish Static Site To Github</h1>
+    
+      
+
+    <h3>Table of Contents</h3>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#1---install-hugo">1 - INSTALL HUGO</a></li>
+    <li><a href="#2---setup-ssh-keys-on-github">2 - SETUP SSH KEYS ON GITHUB</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#3---setup--github--repos">3 - SETUP  GITHUB  REPOS</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#deployment--script">DEPLOYMENT  SCRIPT</a></li>
+  </ul>
+</nav>
+    
+    <hr>
+<h2 id="introduction">Introduction</h2>
+<ul>
+<li>World has moved on to Jamstack</li>
+<li>They have you believe it&rsquo;s so simple &hellip; but it never reall is.</li>
+<li>But you really want to publish it somewhere &hellip; not just your local desktop.</li>
+<li>&hellip; ToDo&hellip;</li>
+<li>&hellip; environemnt used for this blog &hellip;</li>
+</ul>
+<p>This guide is not a hugo tutorial.  This is a guide for all the necessary steps that come after you have gone through a Hugo tutorial and decide it is time to publish something on Github-Pages.   You have a rough idea on what publishing from Hugo entails, but you&rsquo;re nagged by knowledge-gaps of various details of the setup.  I have consolidated all necessary tid-bits in this blog towards that goal.</p>
+<h4 id="pre-requisites--target-audience">Pre-requisites / Target Audience:</h4>
+<ul>
+<li>You have a GitHub account and comfortable creating repos on it.</li>
+<li>You have Git &amp; GitBash installed on your windows machine.</li>
+<li>Comfortable using a static site generator &hellip; like Hugo, Jekyll etc.</li>
+</ul>
+<hr>
+<h2 id="1---install-hugo">1 - INSTALL HUGO</h2>
+<p>You could choose to download the binary installers from hugo website. But simplest way to install it on windows is via <code>chocolatey</code>.  You want to grab the hugo-extended version.</p>
+<p><strong>Note</strong>: Make sure to run this from a cmd prompt with administrative priveleges.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ choco install hugo-extended
+</code></pre></div><hr>
+<h2 id="2---setup-ssh-keys-on-github">2 - SETUP SSH KEYS ON GITHUB</h2>
+<h4 id="set-up-your-default-identity-use-git-bash-terminal">Set up your default identity. Use Git-Bash Terminal</h4>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&#34;ga.willbe@gmail.com&#34;</span>
+
+$ dir  ~/.ssh  --&gt; C:/Users/&lt;you&gt;/.ssh
+id_rsa 
+id_rsa.pub
+</code></pre></div><h4 id="add-the-key-to-the-ssh-agent">Add the key to the ssh-agent</h4>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">eval</span>  <span class="k">$(</span>ssh-agent<span class="k">)</span>
+Agent pid <span class="m">9700</span> 
+
+$ ssh-add  ~/.ssh/id_rsa
+</code></pre></div><h4 id="add-the-public-key-to-your-github-account">Add the public key to your Github Account</h4>
+<ul>
+<li>Login to Github account.</li>
+<li>Goto Settings</li>
+<li>SSH and GPG Keys -&gt; SSH Keys -&gt; New SSH Key</li>
+<li>Paste contents of <code>id_rsa.pub</code> (content starts with ssh-rsa AAE87F&hellip;)
+<ul>
+<li>Give this key a name &hellip; something like: <code>GA-Home-Laptop</code></li>
+<li>Save</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3---setup--github--repos">3 - SETUP  GITHUB  REPOS</h2>
+<h4 id="there-are-2-types-of-github-pages">There are 2 types of GitHub Pages:</h4>
+<ul>
+<li>User/Organization Pages:  https://&lt;username/org&gt;.github.io/</li>
+<li>Project Pages:  https://&lt;username/org&gt;.github.io/<!-- raw HTML omitted -->/</li>
+</ul>
+<p>This article will focus on the first one only.</p>
+<h4 id="github-userorganization-pages">GitHub User/Organization Pages</h4>
+<ul>
+<li>
+<p>Create a source-project repo (say <code>my-blogs</code>) on Github (private repo).</p>
+<ul>
+<li>Check &ldquo;Initialize this repository with a README&rdquo; option.</li>
+<li>URL: <code>https://github.com/[user]/[source-project]</code></li>
+<li>This will host the static site&rsquo;s source files.</li>
+</ul>
+</li>
+<li>
+<p>Create a <code>[user].github.io</code> repository (public repo)</p>
+<ul>
+<li>Check &ldquo;Initialize this repository with a README&rdquo; option.</li>
+<li>URL: <code>https://github.com/[user]/[user].github.io</code></li>
+<li>This will host the public github pages rendered from source files.</li>
+</ul>
+</li>
+<li>
+<p>Now clone the source-project repo to your local machine</p>
+<ul>
+<li><code>git clone https://github.com/[user]/[source-project]</code></li>
+<li>We don&rsquo;t need to clone the public github pages repo.</li>
+</ul>
+</li>
+</ul>
+<h4 id="reset-usergithubio-repo-to-an-initial-state-optional">Reset <code>[user].github.io</code> repo to an initial state [Optional]</h4>
+<p>Perhaps you had previously explored creation of github-pages directly on github. Suddenly you are thrown into the deep end of the pool of JamStack frameworks like Jekyll, Hugo, Gatsby etc. Now you want to clean out your repo and start afresh, but not sure how to do it other than a complete deletion and recreation of your repo. Here are the steps to initialize your repo (<code>[user].github.io</code>).  It&rsquo;s preferable to use a  <code>GitBash Terminal</code> for the following steps:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">-- Clone the <span class="o">[</span>user<span class="o">]</span>.github.io repo to <span class="nb">local</span> machine
+git clone https://github.com/<span class="o">[</span>user<span class="o">]</span>/<span class="o">[</span>user<span class="o">]</span>.github.io.git
+
+-- Delete everything in this cloned repo. 
+<span class="nb">cd</span>  <span class="o">[</span>user<span class="o">]</span>.github.io
+rm  -rf  *
+
+-- Recreate the repo from the current contents only
+git init
+git add .
+git commit -m <span class="s2">&#34;Initial commit&#34;</span>
+
+-- push to the github remote repo ensuring you overwrite <span class="nb">history</span>
+-- Make sure you have already added your ssh-key to Github settings. 
+git remote add origin git@github.com:<span class="o">[</span>user<span class="o">]</span>/<span class="o">[</span>user<span class="o">]</span>.github.io.git
+git push  -u  --force  origin  master
+
+-- Now you can delete your <span class="o">[</span>user<span class="o">]</span>.github.io folder.
+$ rm -rf <span class="o">[</span>user<span class="o">]</span>.github.io
+</code></pre></div><hr>
+<h2 id="deployment--script">DEPLOYMENT  SCRIPT</h2>
+<p>The hugo website shows a simple script to deploy the <code>public</code> folder to <code>[user].github.io</code>.  However,  I have found that it does not always work when things go awry (more likely due to my limited knowledge of intricacies of git submodules).  I have written an alternative script that I find to be a lot more robust.</p>
+<ul>
+<li>Just copy-paste the two scripts to your source-project folder  (The first is just a .bat file that wraps around the Git-Bash shell script).</li>
+<li>If you&rsquo;re using a windows terminal, use  <code>deploy.bat &quot;some commit msg&quot;</code>.</li>
+<li>If you&rsquo;re using a Git-Bash terminal, use  <code>deploy.sh &quot;some commit msg&quot;</code>.</li>
+</ul>
+<p><strong>deploy.bat</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">@echo OFF
+REM ORIGINAL:  cmd /c <span class="s2">&#34; &#34;</span>C:<span class="se">\P</span>rogram Files<span class="se">\G</span>it<span class="se">\b</span>in<span class="se">\b</span>ash.exe<span class="s2">&#34; --login -i -- test.sh &#34;</span>
+REM login -i may not be required.
+
+cmd /c <span class="s2">&#34; &#34;</span>C:<span class="se">\P</span>rogram Files<span class="se">\G</span>it<span class="se">\b</span>in<span class="se">\b</span>ash.exe<span class="s2">&#34; -- deploy.sh %*&#34;</span>
+</code></pre></div><p><strong>deploy.sh</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">0</span> <span class="o">]</span> 
+<span class="k">then</span> 
+    <span class="nb">echo</span> <span class="s2">&#34;No Commit Message Supplied&#34;</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="c1"># Gather all arguments into a single commit message</span>
+<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;&#39;</span><span class="nv">$*</span><span class="s2">&#39;&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;Commit Message:  </span><span class="nv">$msg</span><span class="s2">&#34;</span>
+
+<span class="nv">cwd</span><span class="o">=</span><span class="nv">$PWD</span>
+
+<span class="c1"># ---- Make sure public is sync&#39;d to [user].github.io repo -----</span>
+<span class="nv">public_exists</span><span class="o">=</span><span class="nb">true</span>
+
+<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&#34;public&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">cd</span> public/
+    <span class="nv">result</span><span class="o">=</span><span class="k">$(</span>git remote -v<span class="k">)</span>
+
+    <span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$result</span><span class="s2">&#34;</span> <span class="o">==</span> *<span class="s2">&#34;github.io.git (push)&#34;</span>* <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">&#34;Folder public/ is sync&#39;d to *.github.io. Looking Good.&#34;</span>
+    <span class="k">else</span>
+        <span class="nb">echo</span> <span class="s2">&#34;Folder public/ does not have a .git sync&#39;d to *.github.io.  Deleting public/ folder.&#34;</span>
+        <span class="nb">cd</span> <span class="nv">$cwd</span>
+        rm -rf public
+        <span class="k">if</span> <span class="o">[</span> -d public <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+            <span class="nb">echo</span> <span class="s2">&#34;Could not delete public/ folder. Sure nothing is using it right now?&#34;</span>
+            <span class="nb">exit</span> <span class="m">1</span>
+        <span class="k">fi</span>
+        <span class="nv">public_exists</span><span class="o">=</span><span class="nb">false</span>
+    <span class="k">fi</span>
+<span class="k">else</span>
+    <span class="nv">public_exists</span><span class="o">=</span><span class="nb">false</span> <span class="c1"># directory not found.</span> 
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$public_exists</span> <span class="o">==</span> <span class="s2">&#34;false&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>  <span class="c1"># recreate public/ folder</span>
+    <span class="nb">cd</span> <span class="nv">$cwd</span>
+    <span class="nb">read</span> -p <span class="s1">&#39;Github user name: &#39;</span> user
+    git submodule add  -b master -f https://github.com/<span class="nv">$user</span>/<span class="nv">$user</span>.github.io.git  public
+    <span class="c1"># This will sync [user].github.io to a newly created public folder.</span> 
+<span class="k">fi</span>
+
+
+<span class="c1"># ----------- Now process public/ folder ------------</span>
+<span class="nb">cd</span> <span class="nv">$cwd</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;INFO: Removing everythong from public except .git and .gitignore&#34;</span>
+rm -rf public/*
+
+<span class="nb">echo</span> <span class="s2">&#34;INFO: Generating the Site Files in public/&#34;</span>
+hugo -D  
+
+<span class="nb">echo</span> <span class="s2">&#34;INFO: Committing to Git&#34;</span>
+<span class="nb">cd</span> public
+git add .
+git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;INFO: Pushing contents of public to remote origin&#34;</span>
+git push origin master
+
+<span class="nb">echo</span> <span class="s2">&#34;!!! EXIT !!!&#34;</span>
+<span class="nb">exit</span> <span class="m">0</span>
+</code></pre></div>
+
+    
+    <div class="nav-next-prev">
+        <div class="nav-prev">
+            
+                <a href="https://gopalagrawal.github.io/posts/2020-08/blog2/"><i class="fas fa-chevron-left"></i></a>
+            
+        </div>
+
+        <a class="nav-top" href="#">top</i></a>
+
+        <div class="nav-next">
+            
+                <a class="grayed-out" href="javascript:void()"><i class="fas fa-chevron-right"></i></a>
+            
+        </div>
+    </div>
+    
+
+            </div><footer>
+<div class="footer-content">
+
+  <div class="contact-info">
+
+      
+        <div class="footer-mail">
+          <i class="fa fa-envelope"></i> <a href="mailto:anonymous@gmail.com">Email</a> 
+        </div>
+      
+      
+      
+      <div class="footer-phone">
+          <i class="fa fa-phone"></i> 8888888888 
+      </div>
+      
+
+      
+      <div class="footer-github">
+        <a href="https://github.com/gopalagrawal/">
+            <i class="fa fa-github"></i> </a>
+      </div>
+        
+
+      
+      <div class="footer-linkedin">
+        <a href="https://www.linkedin.com/in/gopal-agrawal-a9692b4/">
+            <i class="fa fa-linkedin"></i> </a>
+      </div>
+            
+  </div>
+
+
+<p class="copyright meta">@2020 Copyright</p>
+
+</div>
+</footer>
+
+</main>
+    </body>
+    <script src=https://gopalagrawal.github.io/js/navbutton.js></script>
+</html>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>A Tech-Guy&#39;s Random Musings on Gopal Agrawal&#39;s Blog</title>
-    <link>https://gopalagrawal.github.io/</link>
-    <description>Recent content in A Tech-Guy&#39;s Random Musings on Gopal Agrawal&#39;s Blog</description>
+    <title>Posts on Gopal Agrawal&#39;s Blog</title>
+    <link>https://gopalagrawal.github.io/posts/</link>
+    <description>Recent content in Posts on Gopal Agrawal&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>@2020 Copyright</copyright>
     <lastBuildDate>Sun, 16 Aug 2020 20:06:47 +0530</lastBuildDate>
     
-	<atom:link href="https://gopalagrawal.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://gopalagrawal.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -48,15 +48,6 @@ JUST ANOTHER STMT - 33333333</description>
       <guid>https://gopalagrawal.github.io/posts/2020-07/nepaltravel/</guid>
       <description>[DRAFT] So I actually travelled a year back. Some more stuff here.
 Cooooollll&amp;hellip;..</description>
-    </item>
-    
-    <item>
-      <title>Get in Touch</title>
-      <link>https://gopalagrawal.github.io/contact/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://gopalagrawal.github.io/contact/</guid>
-      <description>Send</description>
     </item>
     
   </channel>
